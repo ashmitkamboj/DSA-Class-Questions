@@ -1,44 +1,37 @@
 import java.util.Scanner;
-public class SecondLargest {
-    public static int secondLargest(int[] arr){
-        int n = arr.length;
-        if (n < 2) {
+
+public class secondLargest {
+    public int getSecondLargest(int[] arr) {
+        if (arr.length < 2){
             return -1;
-        }
-        int first = Integer.MIN_VALUE, second = Integer.MIN_VALUE;
+        } 
+        int largest = Integer.MIN_VALUE;
+        int secondLargest = Integer.MIN_VALUE;
+
         for (int num : arr){
-            if (num > first) {
-                second = first;
-                first = num;
-            } else if (num > second && num < first) {
-                second = num;
+            if (num > largest){
+                secondLargest = largest;
+                largest = num;
+            } else if (num > secondLargest && num != largest){
+                secondLargest = num;
             }
         }
-        if (second == Integer.MIN_VALUE) {
-            return -1;
-        }
-        return second;
+        return (secondLargest == Integer.MIN_VALUE) ? -1 : secondLargest; 
     }
 
-    public static void main(String[]args) {
+    public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        System.out.println("Enter the number of elements in the array:");
+        System.out.print("Enter number of elements: ");
         int n = sc.nextInt();
+        int[] arr = new int[n];
 
-        if (n < 2) {
-            System.out.println("Array must contain at least two elements.");
-            return;
-        }
-
-        int [] arr = new int[n];
-        for(int i = 0; i < n; i++){
+        System.out.println("Enter elements:");
+        for (int i = 0; i < n; i++) {
             arr[i] = sc.nextInt();
         }
-        int result = secondLargest(arr);
-        if (result == -1) {
-            System.out.println("No second largest element found.");
-        } else {
-            System.out.println("The second largest element is: " + result);
-        }
+
+        secondLargest obj = new secondLargest();
+        int result = obj.getSecondLargest(arr);
+        System.out.println("Second Largest Element: " + result);
     }
 }
