@@ -1,45 +1,36 @@
+
 import java.util.*;
+
 public class Sereja {
     public static void main(String[] args) {
-        Scanner sc =  new Scanner(System.in);
+        Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
-
-        int[] array = new int[n];
+        int[] cards = new int[n];
         for (int i = 0; i < n; i++) {
-            array[i] = sc.nextInt();
+            cards[i] = sc.nextInt();
         }
-
-
-        int left = 0;
-        int right = n - 1;
-        int sereja = 0, dima = 0;
-        boolean turn = true;
-
-        while (left <= right){
-            if (turn == true){
-                if(array[left] > array[right]){
-                    sereja += array[right];
-                    left++;
-                } else {
-                    sereja += array[right];
-                    right--;
-                }
-                turn = false;
+        
+        int left = 0, right = n - 1;
+        int flag = 0;
+        long sereja = 0, dima = 0;
+        
+        while (left <= right) {
+            int pick;
+            if (cards[left] > cards[right]) {
+                pick = cards[left++];
+            } else {
+                pick = cards[right--];
             }
-
-            if (turn == false){
-                if(array[left] > array[right]){
-                    dima += array[left];
-                    left++;
-                } else {
-                    dima += array[right];
-                    right--;
-                }
-                turn = true;
+            
+            if (flag == 0) {
+                sereja += pick;
+            } else {
+                dima += pick;
             }
+            flag = 1 - flag;
         }
+        
         System.out.println(sereja);
         System.out.println(dima);
-
     }
 }
